@@ -1,1 +1,18 @@
-<p>login works!</p>
+<form [formGroup]="userLogin" (ngSubmit)="onSubmit()">
+    <label>
+        Email:
+        <input type="text" formControlName="email">
+    </label>
+    <label>
+        Password:
+        <input type="password" formControlName="password">
+    </label>
+    <button type="submit" [disabled]="userLogin.invalid">Log In</button>
+    <!-- 
+        TODO:
+        validate (sync + async)
+        if invalid email
+    
+    -->
+    <p>Status: {{userLogin.status}}</p>
+</form>
