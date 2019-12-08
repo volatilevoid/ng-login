@@ -28,8 +28,11 @@ export class LoginComponent implements OnInit {
       password: this.userLogin.value.password
     }
     this.authenticator.logIn(user).then(response => {
-      // redirect if ok, odjeb if not
-      console.log('logged in');
+      // redirect if ok+local storage, odjeb if not
+      localStorage.setItem("userData", JSON.stringify(user));
+      console.log('OK');
+      console.log(localStorage.getItem('userData'));
+      
     }).catch(response => {
       console.log('rejected');
     });
