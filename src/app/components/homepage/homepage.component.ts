@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -11,11 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  email: string;
+  email: string = '';
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.email = JSON.parse(localStorage.getItem('userData')).email;
+    if(localStorage.getItem('userData') !== null) {
+      this.email = JSON.parse(localStorage.getItem('userData')).email;
+    }
   }
 
   logOut() {

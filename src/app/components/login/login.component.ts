@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  loginFailed:boolean;
   userLogin: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required)
@@ -24,21 +24,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loginFailed = false;
     const user: User = {
       email: this.userLogin.value.email,
       password: this.userLogin.value.password
     }
-    this.authenticator.logIn(user).then(response => {
-      // redirect if ok+local storage, odjeb if not
+    this.authenticator.logIn(user).then(() => {
       localStorage.setItem("userData", JSON.stringify(user));
       this.router.navigateByUrl('/home');
-      console.log('OK');
-      console.log(localStorage.getItem('userData'));
-      
-    }).catch(response => {
-      console.log('rejected');
+    }).catch(() => {
+      this.loginFailed = true;
     });
-
   }
 
 }

@@ -8,18 +8,18 @@ import { resolve } from 'url';
   providedIn: 'root'
 })
 export class AuthService {
-  private isLoggedIn: boolean = false;
+  // private isLoggedIn: boolean = false;
   constructor(private checkCredentials: CheckUserService) { }
   logIn(user: User) {
     let promise = new Promise((resolve, reject) => {
       // this.checkCredentials.isAllowed(user) === true ? resolve() : reject();
       if (this.checkCredentials.isAllowed(user)) {
         localStorage.setItem("userData", JSON.stringify(user));
-        this.isLoggedIn = true;
+        // this.isLoggedIn = true;
         resolve();
       }
       else {
-        this.isLoggedIn = false;
+        // this.isLoggedIn = false;
         reject();
       }
     });
