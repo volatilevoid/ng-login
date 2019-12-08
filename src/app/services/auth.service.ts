@@ -14,9 +14,9 @@ export class AuthService {
     let promise = new Promise((resolve, reject) => {
       // this.checkCredentials.isAllowed(user) === true ? resolve() : reject();
       if (this.checkCredentials.isAllowed(user)) {
+        localStorage.setItem("userData", JSON.stringify(user));
         this.isLoggedIn = true;
         resolve();
-        localStorage.setItem("userData", JSON.stringify(user));
       }
       else {
         this.isLoggedIn = false;
@@ -31,7 +31,11 @@ export class AuthService {
     }
   }
 
-  getLoginStatus() {
-    return this.isLoggedIn;
+  isLogged() {
+    if(localStorage.getItem("userData") === null) {
+      return false;
+    }
+    return true;
+    // return this.isLoggedIn;
   }
 }

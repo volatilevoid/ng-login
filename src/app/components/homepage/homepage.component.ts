@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -11,14 +12,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HomepageComponent implements OnInit {
   email: string;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.email = JSON.parse(localStorage.getItem('userData')).email;
   }
 
-  onSubmit() {
-
+  logOut() {
+    this.authService.logOut();
+    this.router.navigateByUrl('/');
   }
 
 }

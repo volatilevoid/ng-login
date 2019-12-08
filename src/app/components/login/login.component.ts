@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
+import { Router } from '@angular/router';
 
 
 
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required)
   });
 
-  constructor(private authenticator: AuthService) { }
+  constructor(private authenticator: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
     this.authenticator.logIn(user).then(response => {
       // redirect if ok+local storage, odjeb if not
       localStorage.setItem("userData", JSON.stringify(user));
+      this.router.navigateByUrl('/home');
       console.log('OK');
       console.log(localStorage.getItem('userData'));
       
