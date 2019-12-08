@@ -12,9 +12,9 @@ export class CheckUserService {
   constructor() { }
 
   isAllowed(user: User): boolean {
-    var isIn: boolean = false;
+    let isIn: boolean = false;
 
-    for(let i: number = 0, l = ALLOWEDUSERS.length; i < l; i++ ) {
+    for(let i: number = 0, l: number = ALLOWEDUSERS.length; i < l; i++ ) {
       if(ALLOWEDUSERS[i].email === user.email && ALLOWEDUSERS[i].password === user.password) {
         isIn = true;
       }
